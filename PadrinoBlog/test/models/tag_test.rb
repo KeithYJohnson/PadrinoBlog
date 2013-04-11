@@ -1,26 +1,22 @@
-# class Tag < ActiveRecord::Base
-# 	has_many :post_tags
-# 	has_many :posts, :through => :post_tag
-
-# end
-
-
-
 require File.expand_path(File.dirname(__FILE__) + '/../test_config.rb')
 
 class TagTest < Test::Unit::TestCase
   context "Tag Model" do
   	setup do
-			@tag = Tag.new  		
-
+			@tag = Tag.new(:name => "sleep")
+      @tag.post = Post.new(:title => "Bedtime")
+      #@tag.post = Post.new(:title => "Bedtime")
 
 		end
 
 
 
-    should 'construct new instance' do
-      # @tag = Tag.new
-      # assert_not_nil @tag
+    should 'belong to post' do
+      assert @tag.respond_to?(:post)
+      assert_equal "sleep", @tag.posts.addtag
     end
+
+
+
   end
 end
